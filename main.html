@@ -1,0 +1,267 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Calculator</title>
+<style>
+	.unitContainer{
+		border: 1px solid black;
+		width:	400px;
+		height: 258px;
+	}
+	.calcContainer{
+		border: 1px solid black;
+		width:	180px;
+		height: 254px;
+		margin: 1px;
+	}
+	.numberButton {
+		background-color: charcoal;
+		color: black;
+		border: 1px solid black;
+		height: 40px;
+		width: 40px;
+		margin: 1px 1px 1px 1px;
+		padding: 0px;
+		text-align: top;
+		<!--text-shadow: 1px 1px 2px;-->
+	}
+	.entry {
+		background-color: charcoal;
+		color: black;
+		border: 1px solid black;
+		height: 40px;
+		width: 176px;
+		margin: 1px 1px 1px 1px;
+		padding: 0px;
+		text-align: right;
+	}
+	.long {
+		background-color: charcoal;
+		color: black;
+		border: 1px solid black;
+		height: 40px;
+		width: 86px;
+		margin: 1px 1px 1px 1px;
+		padding: 0px;
+		text-align: center;
+		<!--text-shadow: 1px 1px 2px;-->
+	}
+	.log {
+		background-color: charcoal;
+		color: black;
+		border: 1px solid black;
+		height: 230px;
+		width: 212px;
+		margin: 1px 1px 1px 1px;
+		padding: 0px;
+		text-align: right;
+	}
+	.logInput {
+		background-color: charcoal;
+		color: black;
+		border: 1px solid black;
+		height: 20px;
+		width: 212px;
+		margin: 1px 1px 1px 1px;
+		padding: 0px;
+		text-align: right;
+	}
+
+	.logLine2 {
+		border: 1px dotted black;
+		color: black;
+		text-align: right;
+		height: 19px;
+		width: 210px;
+	}
+
+	.logLine {
+		<!--border: 1px dotted black;-->
+		color: black;
+		text-align: right;
+		height: 19px;
+		width: 210px;
+	}
+</style>
+<script>
+	<!--var entry = document.getElementById("output");>
+	var mem = [];
+	var redundant = false
+	var currentOp = 0;
+	function numPress(num){
+		var x = document.getElementById("output").innerHTML;
+		document.getElementById("output").innerHTML = x.concat(num);
+	}
+	function opPress(op){
+	//0: /
+	//1: *
+	//2: +
+	//3: -
+		var x = document.getElementById("output").innerHTML;
+		var result = 0;
+		mem[mem.length] = x;
+		if (op == 0) {
+			currentOp = 0;
+			if (mem.length == 1) {
+				x = x.concat("/");
+			}
+			document.getElementById("logInput").innerHTML = document.getElementById("logInput").innerHTML.concat(x);
+			clearLocal();
+			if(mem.length > 1) {
+				var result = (mem[mem.length - 2]/mem[mem.length -1]);
+				document.getElementById("output").innerHTML = result
+			}
+		} else if (op == 1) {
+			currentOp = 1;
+			x = x.concat("*");
+			document.getElementById("logInput").innerHTML = document.getElementById("logInput").innerHTML.concat(x);
+			clearLocal();
+		} else if (op == 2) {
+			currentOp = 2;
+			x = x.concat("+");
+			document.getElementById("logInput").innerHTML = document.getElementById("logInput").innerHTML.concat(x);
+			clearLocal();
+		} else if (op == 3) {
+			currentOp = 3;
+			x = x.concat("-");
+			document.getElementById("logInput").innerHTML = document.getElementById("logInput").innerHTML.concat(x);
+			clearLocal();
+		} else if (op == 4) {
+			console.log("ENTER");
+			console.log(mem[0]);
+			console.log(mem.length);
+			if(mem.length == 2) {
+				mem[1] = document.getElementById("output").innerHTML;
+				console.log(mem[1]);
+				document.getElementById("logInput").innerHTML = document.getElementById("logInput").innerHTML.concat(document.getElementById("output").innerHTML);
+				updateLog();
+				result = calculate(mem[0], mem[1], currentOp)
+				updateLog2("= " + result);
+				document.getElementById("output").innerHTML = result
+				clearLocalLog();
+				mem = [result];
+				}
+			else{
+				updateLog();
+				//tbc
+			}
+		}
+		
+		
+	}
+	
+	function ac() {
+	}
+	
+	function clearLocal() {
+		document.getElementById("output").innerHTML = " ";
+	}
+	
+	function clearLocalLog() {
+		document.getElementById("logInput").innerHTML = " ";
+	}
+	
+	function calculate(x, y, op){
+		if(op == 0){
+			return(x/y);
+		} else if(op == 1) {
+			return(x*y);
+		} else if(op == 2) {
+			return(x+y);
+		} else if(op == 3) {
+			return(x-y);
+		} else {
+			return (0);
+		}
+	}
+	
+	function updateLog(){
+		document.getElementById("log11").innerHTML = document.getElementById("log10").innerHTML;
+		document.getElementById("log10").innerHTML = document.getElementById("log9").innerHTML;
+		document.getElementById("log9").innerHTML = document.getElementById("log8").innerHTML;
+		document.getElementById("log8").innerHTML = document.getElementById("log7").innerHTML;
+		document.getElementById("log7").innerHTML = document.getElementById("log6").innerHTML;
+		document.getElementById("log6").innerHTML = document.getElementById("log5").innerHTML;
+		document.getElementById("log5").innerHTML = document.getElementById("log4").innerHTML;
+		document.getElementById("log4").innerHTML = document.getElementById("log3").innerHTML;
+		document.getElementById("log3").innerHTML = document.getElementById("log2").innerHTML;
+		document.getElementById("log2").innerHTML = document.getElementById("log1").innerHTML;
+		document.getElementById("log1").innerHTML = document.getElementById("log0").innerHTML;
+		document.getElementById("log0").innerHTML = document.getElementById("logInput").innerHTML;
+	}
+	
+	function updateLog2(value){
+		document.getElementById("log11").innerHTML = document.getElementById("log10").innerHTML;
+		document.getElementById("log10").innerHTML = document.getElementById("log9").innerHTML;
+		document.getElementById("log9").innerHTML = document.getElementById("log8").innerHTML;
+		document.getElementById("log8").innerHTML = document.getElementById("log7").innerHTML;
+		document.getElementById("log7").innerHTML = document.getElementById("log6").innerHTML;
+		document.getElementById("log6").innerHTML = document.getElementById("log5").innerHTML;
+		document.getElementById("log5").innerHTML = document.getElementById("log4").innerHTML;
+		document.getElementById("log4").innerHTML = document.getElementById("log3").innerHTML;
+		document.getElementById("log3").innerHTML = document.getElementById("log2").innerHTML;
+		document.getElementById("log2").innerHTML = document.getElementById("log1").innerHTML;
+		document.getElementById("log1").innerHTML = document.getElementById("log0").innerHTML;
+		document.getElementById("log0").innerHTML = value;
+	}
+</script>
+</head>
+<body>
+
+<div class = "unitContainer">
+	<div class = "calcContainer" style = "float: left;">
+		<div id = "output" class = "entry"></div>
+		<div>
+			<div>
+				<button type="button" onclick="numPress(7)" class="numberButton"><p>7</p></button>
+				<button type="button" onclick="numPress(8)" class="numberButton"><p>8</p></button>
+				<button type="button" onclick="numPress(9)" class="numberButton"><p>9</p></button>
+				<button type="button" onclick="opPress(0)" class="numberButton"><p>/</p></button>
+			</div>
+			<div>
+				<button type="button" onclick="numPress(4)" class="numberButton"><p>4</p></button>
+				<button type="button" onclick="numPress(5)" class="numberButton"><p>5</p></button>
+				<button type="button" onclick="numPress(6)" class="numberButton"><p>6</p></button>
+				<button type="button" onclick="opPress(1)" class="numberButton"><p>*</p></button>
+			</div>
+			<div>
+				<button type="button" onclick="numPress(1)" class="numberButton"><p>1</p></button>
+				<button type="button" onclick="numPress(2)" class="numberButton"><p>2</p></button>
+				<button type="button" onclick="numPress(3)" class="numberButton"><p>3</p></button>
+				<button type="button" onclick="opPress(2)" class="numberButton"><p>+</p></button>
+			</div>
+			<div>
+				<button type="button" onclick="numPress(0)" class="numberButton"><p>0</p></button>
+				<button type="button" onclick = "ac" class="numberButton"><p>AC</p></button>
+				<button type="button" onclick = "clearLocal" class="numberButton"><p>CE</p></button>
+				<button type="button" onclick="opPress(3)" class="numberButton"><p>-</p></button>
+			</div>
+			<div>
+				<button type="button" onclick ="opPress(4)" class="long"><p>ENTER</p></button>
+				<button type="button" class="long"><p>CLR LOG</p></button>
+			</div>
+		</div>
+	</div>
+	<div class = "log" style = "float: right;">
+		<div id = "log11" class = "logLine"></div>
+		<div id = "log10" class = "logLine"></div>
+		<div id = "log9" class = "logLine"></div>
+		<div id = "log8" class = "logLine"></div>
+		<div id = "log7" class = "logLine"></div>
+		<div id = "log6" class = "logLine"></div>
+		<div id = "log5" class = "logLine"></div>
+		<div id = "log4" class = "logLine"></div>
+		<div id = "log3" class = "logLine"></div>
+		<div id = "log2" class = "logLine"></div>
+		<div id = "log1" class = "logLine"></div>
+		<div id = "log0" class = "logLine"></div>
+	</div>
+	<div class = "logInput" style = "float: right;">
+		<div id = "logInput" class = "logLine">
+			
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
